@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bonne nuit, Divine 💗 mon tout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#090719;
+    --plum:#2b1141;
+    --rose:#ff8fb1;
+    --blush:#ffd3df;
+    --gold:#f3d9a4;
+    --moon:#fff6ea;
+    --bar:min(9vh,70px);
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--midnight);overflow:hidden;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;color:var(--moon)}
+
+  /* ---------- Monde ---------- */
+  #world{
+    position:fixed;inset:0;
+    background:
+      radial-gradient(120% 90% at 18% 0%, #3b1752 0%, transparent 60%),
+      radial-gradient(100% 80% at 92% 100%, #52123f 0%, transparent 55%),
+      linear-gradient(180deg,#090719 0%,#1a0d37 55%,#2d1043 100%);
+  }
+  #camera{position:absolute;inset:0;transform-origin:50% 55%;animation:push 160s linear forwards}
+  @keyframes push{from{transform:scale(1)}to{transform:scale(1.12)}}
+  #sky{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+  /* ---------- Effet pellicule ---------- */
+  #vignette{
+    position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at center, transparent 45%, rgba(5,3,15,.78) 100%);
+  }
+  #beat{
+    position:fixed;inset:0;pointer-events:none;opacity:0;
+    background:radial-gradient(circle at 50% 50%, rgba(255,70,120,.38), rgba(255,70,120,0) 62%);
+  }
+  #beat.on{animation:lubdub 1s ease-out infinite}
+  @keyframes lubdub{
+    0%{opacity:0;transform:scale(.92)}
+    10%{opacity:1;transform:scale(1.03)}
+    22%{opacity:.15;transform:scale(.98)}
+    36%{opacity:.8;transform:scale(1.02)}
+    62%,100%{opacity:0;transform:scale(.95)}
+  }
+  #grain{
+    position:fixed;inset:-50%;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    animation:grain .9s steps(6) infinite;
+  }
+  @keyframes grain{
+    0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}
+    60%{transform:translate(-6%,-2%)}80%{transform:translate(5%,4%)}100%{transform:translate(0,0)}
+  }
+  .bar{
+    position:fixed;left:0;right:0;height:0;background:#000;z-index:5;
+    transition:height 2.4s cubic-bezier(.6,.05,.2,1);
+  }
+  .bar.top{top:0}.bar.bottom{bottom:0}
+  body.playing .bar{height:var(--bar)}
+  /* les yeux se ferment doucement à la fin */
+  body.sleepy .bar{height:17vh;transition:height 18s ease-in-out}
+
+  /* ---------- Texte ---------- */
+  #stage{
+    position:fixed;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;
+    padding:12vh 7vw;text-align:center;pointer-events:none;
+  }
+  .line{
+    position:absolute;max-width:min(92vw,900px);
+    transition:opacity 1.8s ease, filter 1.8s ease, transform 2.6s ease;
+  }
+  .line.out{opacity:0;filter:blur(10px);transform:translateY(-18px) scale(1.03)}
+  .w{
+    display:inline-block;margin:0 .14em;
+    opacity:0;filter:blur(14px);transform:translateY(18px) scale(.96);
+    animation:wordIn 1.9s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes wordIn{to{opacity:1;filter:blur(0);transform:none}}
+
+  .soft{
+    font-style:italic;font-weight:300;
+    font-size:clamp(1.7rem,6.2vw,3.1rem);line-height:1.38;color:var(--blush);
+    text-shadow:0 0 24px rgba(255,143,177,.55),0 0 60px rgba(255,143,177,.25);
+  }
+  .script,.hand{
+    font-family:'Great Vibes','Snell Roundhand','Apple Chancery','Brush Script MT',cursive;
+    color:#fff;line-height:1.1;
+  }
+  .script{
+    font-size:clamp(3.6rem,17vw,9rem);
+    text-shadow:0 0 18px rgba(255,143,177,.9),0 0 50px rgba(255,92,138,.7),0 0 110px rgba(255,92,138,.45);
+  }
+  .script.sm{font-size:clamp(3rem,13vw,7rem)}
+  .script.fin{font-size:clamp(2.8rem,12vw,6rem)}
+  .hand{
+    font-size:clamp(2.1rem,8.5vw,4.2rem);color:var(--blush);
+    text-shadow:0 0 22px rgba(255,143,177,.8),0 0 60px rgba(255,92,138,.4);
+  }
+  .hand.mini{font-size:clamp(1.5rem,5.6vw,2.5rem);margin:.15em 0}
+  .name{
+    font-weight:500;letter-spacing:.22em;
+    font-size:clamp(2.6rem,13vw,7.4rem);line-height:1.1;padding-left:.22em;
+  }
+  .name.sm{font-size:clamp(2rem,9vw,4.8rem);letter-spacing:.18em;padding-left:.18em}
+  .name.tiny{font-size:clamp(1.3rem,5.4vw,2.6rem);letter-spacing:.3em;padding-left:.3em}
+  .name .w{
+    margin:0;animation-name:nameIn;
+    background:linear-gradient(180deg,#fff9e8 10%,var(--gold) 55%,#d99a6c 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 22px rgba(243,217,164,.55));
+  }
+  @keyframes nameIn{
+    from{opacity:0;transform:translateY(24px) scale(.9);letter-spacing:.6em}
+    to{opacity:1;transform:none}
+  }
+  .name.pulse{animation:glowPulse 4s ease-in-out infinite}
+  @keyframes glowPulse{
+    0%,100%{filter:drop-shadow(0 0 10px rgba(255,143,177,.4))}
+    50%{filter:drop-shadow(0 0 34px rgba(255,143,177,.9))}
+  }
+  .final-heart{
+    display:block;font-size:clamp(1.8rem,7vw,3rem);margin-top:.3em;
+    animation:beat 1.6s ease-in-out infinite;text-shadow:0 0 24px rgba(255,92,138,.9);
+  }
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+
+  /* ---------- Écran de départ + boutons ---------- */
+  #intro{
+    position:fixed;inset:0;z-index:20;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;
+    background:radial-gradient(circle at 50% 45%, rgba(43,17,65,.93), rgba(9,7,25,.99));
+    transition:opacity 2.2s ease, visibility 2.2s;padding:2rem;text-align:center;
+  }
+  #intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+  #intro .t{
+    font-family:'Great Vibes','Snell Roundhand','Apple Chancery',cursive;
+    font-size:clamp(3.2rem,14vw,6rem);color:#fff;
+    text-shadow:0 0 20px rgba(255,143,177,.9),0 0 60px rgba(255,92,138,.6);
+  }
+  #intro p{
+    font-style:italic;font-weight:300;font-size:clamp(1.2rem,4.5vw,1.7rem);
+    color:var(--blush);max-width:21em;line-height:1.5;
+  }
+  #start{
+    all:unset;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    width:112px;height:112px;border-radius:50%;font-size:3rem;margin-top:.4rem;
+    background:radial-gradient(circle at 35% 30%, #ff9db9, #e0406f 70%);
+    box-shadow:0 0 0 0 rgba(255,92,138,.6),0 0 50px rgba(255,92,138,.6);
+    animation:ring 2.2s ease-out infinite, beat 1.6s ease-in-out infinite;
+  }
+  #start:focus-visible,.ctl:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+  @keyframes ring{to{box-shadow:0 0 0 38px rgba(255,92,138,0),0 0 50px rgba(255,92,138,.6)}}
+  #intro small{font-size:1rem;color:rgba(255,246,234,.6);font-style:italic}
+
+  .ctl{
+    all:unset;cursor:pointer;position:fixed;z-index:10;
+    color:var(--blush);font-size:1.05rem;font-style:italic;
+    padding:.55rem 1.1rem;border-radius:999px;border:1px solid rgba(255,211,223,.35);
+    background:rgba(9,7,25,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    transition:opacity 1.2s ease, background .3s;
+  }
+  .ctl:hover{background:rgba(255,143,177,.25)}
+  #mute{top:calc(var(--bar) + 12px);right:14px;opacity:0;pointer-events:none}
+  body.playing #mute{opacity:.9;pointer-events:auto}
+  #replay{left:50%;bottom:5vh;transform:translateX(-50%);opacity:0;pointer-events:none;z-index:11}
+  #replay.show{opacity:1;pointer-events:auto}
+
+  @media (prefers-reduced-motion: reduce){
+    #camera,#grain,#beat.on{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="world"><div id="camera"><canvas id="sky" aria-hidden="true"></canvas></div></div>
+<div id="vignette"></div>
+<div id="beat"></div>
+<div id="grain"></div>
+<div class="bar top"></div>
+<div class="bar bottom"></div>
+
+<main id="stage" aria-live="polite"></main>
+
+<button class="ctl" id="mute" aria-label="Couper ou remettre la musique">♪ musique</button>
+<button class="ctl" id="replay">revivre cette nuit 💗</button>
+
+<div id="intro">
+  <div class="t">Pour toi, Divine</div>
+  <p>Mets le son, installe-toi bien…<br>ce soir, c’est rien que pour toi.</p>
+  <button id="start" aria-label="Commencer">💗</button>
+  <small>touche le cœur</small>
+</div>
+
+<script>
+(() => {
+  /* =====================================================
+     CIEL : étoiles, lune, lanternes, pétales, cœur d'étoiles…
+     ===================================================== */
+  const cv = document.getElementById('sky');
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W, H, DPR;
+  let stars = [], dust = [], hearts = [], shooters = [], lanterns = [], petals = [], conPts = [], conK = 1;
+  let intensity = 1, playing = false;
+  const COLORS = ['#ff8fb1', '#ff5c8a', '#ffc2d4', '#f3d9a4', '#ffb3c8'];
+  const PETAL_COLORS = ['#ff7aa2', '#ff4f81', '#ffb0c6', '#e0345f', '#ffd0dc'];
+
+  const layers = {
+    lanterns: { v: 0, t: 0 },
+    petals:   { v: 0, t: 0 },
+    con:      { v: 0, t: 0, p: 0 }
+  };
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const n = Math.round(Math.min(280, W * H / 5000));
+    stars = Array.from({length: n}, () => ({
+      x: Math.random() * W, y: Math.random() * H * .94,
+      r: Math.random() * 1.3 + .25, p: Math.random() * 6.28, s: Math.random() * 1.6 + .5
+    }));
+    dust = Array.from({length: reduce ? 20 : 60}, () => ({
+      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.8 + .6,
+      vx: (Math.random() - .5) * 6, vy: -(Math.random() * 10 + 3), p: Math.random() * 6.28
+    }));
+    // cœur d'étoiles (courbe paramétrique du cœur)
+    const N = 72, k = Math.min(W * .42, H * .36) / 17, cy = H / 2 - 2.5 * k;
+    conPts = []; conK = k;
+    for (let i = 0; i <= N; i++){
+      const t = i / N * Math.PI * 2;
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+      conPts.push({ x: W / 2 + x * k, y: cy - y * k });
+    }
+  }
+  addEventListener('resize', resize); resize();
+
+  function heartPath(c, x, y, s){
+    c.beginPath();
+    c.moveTo(x, y + s*.3);
+    c.bezierCurveTo(x, y - s*.2, x - s, y - s*.2, x - s, y + s*.35);
+    c.bezierCurveTo(x - s, y + s*.8, x, y + s, x, y + s*1.25);
+    c.bezierCurveTo(x, y + s, x + s, y + s*.8, x + s, y + s*.35);
+    c.bezierCurveTo(x + s, y - s*.2, x, y - s*.2, x, y + s*.3);
+    c.closePath();
+  }
+
+  function spawnHeart(x, y, big){
+    hearts.push({
+      x: x ?? Math.random() * W, y: y ?? H + 30,
+      s: (Math.random() * 11 + 6) * (big ? 1.3 : 1),
+      vy: -(Math.random() * 38 + 26), vx: (Math.random() - .5) * 10,
+      sway: Math.random() * 22 + 8, ph: Math.random() * 6.28,
+      a: Math.random() * .45 + .45, c: COLORS[(Math.random() * COLORS.length) | 0]
+    });
+  }
+  function burst(n){
+    if (reduce) n = Math.round(n / 3);
+    for (let i = 0; i < n; i++){
+      setTimeout(() => spawnHeart(W * (.12 + Math.random() * .76), H * (.55 + Math.random() * .5)), i * 55);
+    }
+  }
+  function shoot(){
+    shooters.push({
+      x: Math.random() * W * .8 + W * .15, y: Math.random() * H * .35,
+      vx: -(Math.random() * 300 + 380), vy: Math.random() * 120 + 160,
+      life: 0, max: .9 + Math.random() * .4
+    });
+  }
+  function shootMany(n){ for (let i = 0; i < n; i++) setTimeout(shoot, i * 380); }
+
+  function spawnLantern(y){
+    const s = Math.random() * 16 + 14;
+    lanterns.push({
+      x: Math.random() * W, y: y ?? H + s * 2, s,
+      vy: -(Math.random() * 16 + 12) * (s / 24),
+      amp: Math.random() * 16 + 8, ph: Math.random() * 6.28, fl: Math.random() * 6.28
+    });
+  }
+  function spawnPetal(y){
+    petals.push({
+      x: Math.random() * W, y: y ?? -20, s: Math.random() * 6 + 6,
+      vy: Math.random() * 36 + 34, vx: (Math.random() - .3) * 16,
+      r: Math.random() * 6.28, vr: (Math.random() - .5) * 2.2,
+      f: Math.random() * 6.28, vf: Math.random() * 2.2 + 1,
+      a: Math.random() * .25 + .7, c: PETAL_COLORS[(Math.random() * PETAL_COLORS.length) | 0]
+    });
+  }
+  function setLayer(name, val){
+    const L = layers[name]; if (!L) return;
+    if (val > 0 && L.t === 0){
+      if (name === 'lanterns') for (let i = 0; i < 8; i++) spawnLantern(H * (.3 + Math.random() * .7));
+      if (name === 'petals')   for (let i = 0; i < 24; i++) spawnPetal(Math.random() * H);
+    }
+    L.t = val;
+  }
+  function resetLayers(){
+    for (const k in layers){ layers[k].t = 0; layers[k].v = 0; if (layers[k].p !== undefined) layers[k].p = 0; }
+    lanterns = []; petals = [];
+  }
+
+  function drawMoon(t){
+    const mx = W * (W < 600 ? .78 : .84), my = H * .2, mr = Math.min(W, H) * (W < 600 ? .085 : .075);
+    const pulse = 1 + Math.sin(t * .0007) * .06;
+    let g = ctx.createRadialGradient(mx, my, mr * .6, mx, my, mr * 7 * pulse);
+    g.addColorStop(0, 'rgba(255,232,214,.38)');
+    g.addColorStop(.35, 'rgba(255,170,200,.14)');
+    g.addColorStop(1, 'rgba(255,170,200,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    g = ctx.createRadialGradient(mx - mr * .3, my - mr * .3, mr * .1, mx, my, mr);
+    g.addColorStop(0, '#fffaf0'); g.addColorStop(1, '#f7d9c4');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mx, my, mr, 0, 6.283); ctx.fill();
+    ctx.fillStyle = 'rgba(200,150,150,.12)';
+    [[-.3,.1,.22],[.25,-.25,.14],[.2,.35,.18],[-.1,-.4,.09]].forEach(([dx,dy,k]) => {
+      ctx.beginPath(); ctx.arc(mx + dx*mr, my + dy*mr, k*mr, 0, 6.283); ctx.fill();
+    });
+  }
+
+  function drawConstellation(now){
+    const C = layers.con;
+    if (C.v < .01 || !conPts.length) return;
+    const last = conPts.length - 1;
+    const idx = Math.floor(C.p * last);
+    const done = C.p >= 1;
+    ctx.save();
+    const sc = 1 + (done ? .012 * Math.sin(now * .0042) : 0);
+    ctx.translate(W / 2, H / 2); ctx.scale(sc, sc); ctx.translate(-W / 2, -H / 2);
+    ctx.globalAlpha = C.v;
+
+    // halo
+    const halo = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, conK * 20);
+    halo.addColorStop(0, `rgba(255,92,138,${.22 * Math.min(1, C.p * 1.4)})`);
+    halo.addColorStop(1, 'rgba(255,92,138,0)');
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+
+    // fil lumineux
+    ctx.lineWidth = 1.3; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    ctx.strokeStyle = 'rgba(255,190,210,.6)';
+    ctx.shadowColor = '#ff8fb1'; ctx.shadowBlur = 10;
+    ctx.beginPath(); ctx.moveTo(conPts[0].x, conPts[0].y);
+    for (let i = 1; i <= idx; i++) ctx.lineTo(conPts[i].x, conPts[i].y);
+    ctx.stroke();
+
+    // étoiles
+    for (let i = 0; i <= idx; i += 3){
+      const p = conPts[i];
+      const tw = .75 + .25 * Math.sin(now * .003 + i);
+      const r = (i % 9 === 0 ? 3.4 : 2.2) * tw;
+      ctx.shadowColor = '#fff'; ctx.shadowBlur = 14;
+      ctx.fillStyle = '#fff6f0';
+      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.283); ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = `rgba(255,236,226,${.5 * tw})`; ctx.lineWidth = .8;
+      ctx.beginPath();
+      ctx.moveTo(p.x - r * 3, p.y); ctx.lineTo(p.x + r * 3, p.y);
+      ctx.moveTo(p.x, p.y - r * 3); ctx.lineTo(p.x, p.y + r * 3); ctx.stroke();
+    }
+    // tête lumineuse pendant le tracé
+    if (!done){
+      const h = conPts[idx];
+      const g = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, 22);
+      g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(1, 'rgba(255,170,200,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h.x, h.y, 22, 0, 6.283); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawLantern(l, now, level){
+    const x = l.x + Math.sin(now * .0006 + l.ph) * l.amp, y = l.y, s = l.s;
+    const fade = Math.min(1, Math.max(0, y / (H * .25)));
+    const fl = .8 + .2 * Math.sin(now * .007 + l.fl);
+    ctx.save();
+    ctx.globalAlpha = fade;
+    let g = ctx.createRadialGradient(x, y, 0, x, y, s * 3.4);
+    g.addColorStop(0, `rgba(255,190,110,${.42 * fl})`);
+    g.addColorStop(1, 'rgba(255,150,80,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, s * 3.4, 0, 6.283); ctx.fill();
+
+    g = ctx.createLinearGradient(x, y - s * .55, x, y + s * .6);
+    g.addColorStop(0, '#ffe7b8'); g.addColorStop(1, '#ff9a55');
+    ctx.fillStyle = g; ctx.globalAlpha = fade * .94;
+    ctx.beginPath();
+    ctx.moveTo(x - s * .4, y - s * .55); ctx.lineTo(x + s * .4, y - s * .55);
+    ctx.quadraticCurveTo(x + s * .52, y, x + s * .28, y + s * .6);
+    ctx.lineTo(x - s * .28, y + s * .6);
+    ctx.quadraticCurveTo(x - s * .52, y, x - s * .4, y - s * .55);
+    ctx.fill();
+    // flamme
+    ctx.globalAlpha = fade;
+    g = ctx.createRadialGradient(x, y + s * .45, 0, x, y + s * .45, s * .5);
+    g.addColorStop(0, `rgba(255,255,230,${fl})`); g.addColorStop(1, 'rgba(255,220,150,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y + s * .45, s * .5, 0, 6.283); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawPetal(p){
+    ctx.save();
+    ctx.translate(p.x, p.y); ctx.rotate(p.r);
+    ctx.scale(1, .55 + .45 * Math.abs(Math.sin(p.f)));
+    ctx.globalAlpha = p.a * Math.min(1, (H - p.y + 40) / 120);
+    ctx.fillStyle = p.c;
+    ctx.shadowColor = p.c; ctx.shadowBlur = 6;
+    const s = p.s;
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.bezierCurveTo(s * .95, -s * .6, s * .8, s * .75, 0, s);
+    ctx.bezierCurveTo(-s * .8, s * .75, -s * .95, -s * .6, 0, -s);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  let last = performance.now(), nextShoot = 3500, heartAcc = 0, lanAcc = 0, petAcc = 0;
+  function frame(now){
+    const dt = Math.min(.05, (now - last) / 1000); last = now;
+    ctx.clearRect(0, 0, W, H);
+
+    // niveaux des calques
+    for (const k in layers){
+      const L = layers[k];
+      L.v += (L.t - L.v) * Math.min(1, dt * .7);
+      if (Math.abs(L.t - L.v) < .003) L.v = L.t;
+    }
+    const C = layers.con;
+    if (C.t > 0) C.p = Math.min(1, C.p + dt / 12);
+    else if (C.v < .02) C.p = 0;
+
+    // étoiles
+    for (const s of stars){
+      const a = .35 + .65 * (.5 + .5 * Math.sin(now * .001 * s.s + s.p));
+      ctx.fillStyle = `rgba(255,244,235,${a})`;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+      if (s.r > 1.2){
+        ctx.strokeStyle = `rgba(255,244,235,${a * .5})`; ctx.lineWidth = .6;
+        ctx.beginPath(); ctx.moveTo(s.x - s.r*3.2, s.y); ctx.lineTo(s.x + s.r*3.2, s.y);
+        ctx.moveTo(s.x, s.y - s.r*3.2); ctx.lineTo(s.x, s.y + s.r*3.2); ctx.stroke();
+      }
+    }
+    drawMoon(now);
+    drawConstellation(now);
+
+    // poussière d'or
+    for (const d of dust){
+      d.x += d.vx * dt + Math.sin(now * .0006 + d.p) * .15;
+      d.y += d.vy * dt;
+      if (d.y < -10){ d.y = H + 10; d.x = Math.random() * W; }
+      const a = .25 + .35 * Math.sin(now * .002 + d.p);
+      ctx.fillStyle = `rgba(243,217,164,${Math.max(0, a)})`;
+      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
+    }
+
+    // lanternes
+    lanAcc += dt * layers.lanterns.v * (.35 + W / 3000);
+    if (lanAcc > 1 && lanterns.length < 26){ lanAcc = 0; spawnLantern(); }
+    for (let i = lanterns.length - 1; i >= 0; i--){
+      const l = lanterns[i]; l.y += l.vy * dt;
+      if (l.y < -l.s * 3){ lanterns.splice(i, 1); continue; }
+      drawLantern(l, now);
+    }
+
+    // pétales
+    petAcc += dt * layers.petals.v * (1.5 + W / 700) * (reduce ? .4 : 1);
+    if (petAcc > 1 && petals.length < 70){ petAcc = 0; spawnPetal(); }
+    for (let i = petals.length - 1; i >= 0; i--){
+      const p = petals[i];
+      p.y += p.vy * dt; p.x += (p.vx + Math.sin(now * .0011 + p.f) * 22) * dt;
+      p.r += p.vr * dt; p.f += p.vf * dt;
+      if (p.y > H + 30){ petals.splice(i, 1); continue; }
+      drawPetal(p);
+    }
+
+    // cœurs
+    heartAcc += dt * intensity;
+    if (heartAcc > .55){ heartAcc = 0; spawnHeart(); }
+    ctx.save();
+    for (let i = hearts.length - 1; i >= 0; i--){
+      const h = hearts[i];
+      h.y += h.vy * dt;
+      h.x += h.vx * dt + Math.sin(now * .0012 + h.ph) * h.sway * dt;
+      const fade = Math.min(1, Math.max(0, h.y / (H * .3)));
+      if (h.y < -40){ hearts.splice(i, 1); continue; }
+      ctx.globalAlpha = h.a * fade;
+      ctx.shadowColor = h.c; ctx.shadowBlur = 18;
+      ctx.fillStyle = h.c;
+      heartPath(ctx, h.x, h.y, h.s); ctx.fill();
+    }
+    ctx.restore();
+
+    // étoiles filantes
+    nextShoot -= dt * 1000;
+    if (nextShoot < 0 && !reduce){ shoot(); nextShoot = 4500 + Math.random() * 5000; }
+    for (let i = shooters.length - 1; i >= 0; i--){
+      const s = shooters[i];
+      s.life += dt; s.x += s.vx * dt; s.y += s.vy * dt;
+      const k = 1 - s.life / s.max;
+      if (k <= 0){ shooters.splice(i, 1); continue; }
+      const tx = s.x - s.vx * .12, ty = s.y - s.vy * .12;
+      const g = ctx.createLinearGradient(s.x, s.y, tx, ty);
+      g.addColorStop(0, `rgba(255,255,255,${k})`); g.addColorStop(1, 'rgba(255,170,200,0)');
+      ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(tx, ty); ctx.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  for (let i = 0; i < 8; i++) spawnHeart(Math.random() * W, Math.random() * H);
+
+  // un petit cœur à chaque toucher
+  document.addEventListener('pointerdown', e => {
+    if (!playing || e.target.closest('button')) return;
+    for (let i = 0; i < 6; i++){
+      spawnHeart(e.clientX + (Math.random() - .5) * 40, e.clientY + (Math.random() - .5) * 20, true);
+    }
+  });
+
+  /* =====================================================
+     MUSIQUE DOUCE (synthétisée) + battement de cœur
+     ===================================================== */
+  let actx, master, musicOn = true, musicStarted = false, chordIdx = 0;
+  const CH = 4.8, NOTE = .6;
+  const CHORDS = [
+    { bass: 65.41,  pad: [130.81, 164.81, 196.00, 261.63], arp: [261.63, 329.63, 392.00, 523.25] }, // Do
+    { bass: 49.00,  pad: [98.00, 123.47, 146.83, 196.00],  arp: [246.94, 293.66, 392.00, 493.88] }, // Sol
+    { bass: 55.00,  pad: [110.00, 130.81, 164.81, 220.00], arp: [220.00, 261.63, 329.63, 440.00] }, // La mineur
+    { bass: 43.65,  pad: [87.31, 110.00, 130.81, 174.61],  arp: [220.00, 261.63, 349.23, 440.00] }  // Fa
+  ];
+  const MEL = [
+    [[659.25, 783.99], [587.33, 493.88], [523.25, 659.25], [440.00, 523.25]],
+    [[783.99, 659.25], [493.88, 587.33], [659.25, 523.25], [523.25, 440.00]]
+  ];
+  function tone(type, f, t, attack, peak, dur, dest){
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + attack);
+    g.gain.exponentialRampToValueAtTime(.0008, t + dur);
+    o.connect(g); g.connect(dest || master);
+    o.start(t); o.stop(t + dur + .1);
+  }
+  function playChord(){
+    if (!actx) return;
+    const t0 = actx.currentTime + .05;
+    const ch = CHORDS[chordIdx % 4], loop = Math.floor(chordIdx / 4) % 2, ci = chordIdx % 4;
+    chordIdx++;
+    tone('sine', ch.bass, t0, .4, .3, CH + .4);
+    ch.pad.forEach(f => {
+      const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+      lp.connect(master);
+      tone('triangle', f, t0, 1.6, .075, CH + .2, lp);
+    });
+    [0, 1, 2, 3, 2, 1, 2, 3].forEach((k, n) => tone('sine', ch.arp[k] * 2, t0 + n * NOTE, .012, .12, 1.4));
+    MEL[loop][ci].forEach((f, n) => tone('sine', f, t0 + n * (CH / 2), .08, .14, 2.4));
+  }
+  function startMusic(){
+    if (musicStarted) return;
+    musicStarted = true;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    actx = new AC();
+    master = actx.createGain();
+    master.gain.value = 0;
+    master.gain.linearRampToValueAtTime(.22, actx.currentTime + 5);
+    const delay = actx.createDelay(1); delay.delayTime.value = .48;
+    const fb = actx.createGain(); fb.gain.value = .4;
+    const wet = actx.createGain(); wet.gain.value = .5;
+    delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(actx.destination);
+    master.connect(actx.destination); master.connect(delay);
+    playChord();
+    setInterval(playChord, CH * 1000);
+  }
+  function heartbeatSound(n){
+    if (!actx || !musicOn) return;
+    const t = actx.currentTime + .05;
+    for (let i = 0; i < n; i++){
+      tone('sine', 62, t + i + .1, .01, .55, .22, actx.destination);
+      tone('sine', 52, t + i + .38, .01, .38, .2, actx.destination);
+    }
+  }
+  const muteBtn = document.getElementById('mute');
+  muteBtn.addEventListener('click', () => {
+    if (!actx) return;
+    musicOn = !musicOn;
+    master.gain.cancelScheduledValues(actx.currentTime);
+    master.gain.linearRampToValueAtTime(musicOn ? .22 : 0, actx.currentTime + .6);
+    muteBtn.textContent = musicOn ? '♪ musique' : '♪ coupée';
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!actx) return;
+    if (document.hidden) actx.suspend(); else actx.resume();
+  });
+
+  /* =====================================================
+     LE FILM
+     ===================================================== */
+  const stage = document.getElementById('stage');
+  const replay = document.getElementById('replay');
+  const beatEl = document.getElementById('beat');
+  let timers = [];
+
+  const FINAL_HTML =
+    '<div class="script fin"><span class="w" style="animation-delay:0s">Bonne</span> <span class="w" style="animation-delay:.35s">nuit,</span></div>' +
+    '<div class="hand mini"><span class="w" style="animation-delay:1.3s">mon cœur,</span> <span class="w" style="animation-delay:1.8s">mon amour,</span> <span class="w" style="animation-delay:2.3s">mon ange</span></div>' +
+    '<div class="name sm pulse"><span class="w" style="animation-delay:3.4s">DIVINE</span></div>' +
+    '<div class="name tiny"><span class="w" style="animation-delay:4.6s">MON TOUT</span></div>' +
+    '<span class="final-heart">💗</span>' +
+    '<div class="hand mini"><span class="w" style="animation-delay:7s">Je t’aime à l’infini</span></div>';
+
+  const SCRIPT = [
+    // — Prologue —
+    { t: 2.5,   d: 4.2, cls: 'soft', txt: 'Mon cœur…', int: 1 },
+    { t: 7.4,   d: 4.4, cls: 'soft', txt: 'Avant de fermer les yeux,', int: 1 },
+    { t: 12.4,  d: 5.0, cls: 'soft', txt: 'je voulais te dire quelque chose de très important.', int: 1.6, burst: 10 },
+    { t: 18.0,  d: 4.8, cls: 'script', txt: 'Bonne nuit', int: 2, burst: 18 },
+    // — Les lanternes —
+    { t: 24.0,  d: 5.2, cls: 'soft', txt: 'Si je pouvais, je t’offrirais le ciel entier…', int: 1.2, layer: { lanterns: 1 } },
+    { t: 30.0,  d: 4.8, cls: 'soft', txt: 'chaque étoile serait une promesse,', int: 1.2 },
+    { t: 35.6,  d: 5.2, cls: 'soft', txt: 'chaque lanterne, un baiser pour veiller sur toi.', int: 1.4 },
+    // — Les pétales —
+    { t: 41.6,  d: 4.4, cls: 'script', txt: 'mon amour', int: 2.2, burst: 16, layer: { petals: 1 } },
+    { t: 46.8,  d: 4.6, cls: 'soft', txt: 'Tu es la douceur de mes soirs,', int: 1.4 },
+    { t: 52.0,  d: 4.6, cls: 'soft', txt: 'la lumière de mes matins,', int: 1.4 },
+    // — Le battement —
+    { t: 57.4,  d: 5.0, cls: 'soft', txt: 'le battement qui rythme mon cœur.', int: 1, beat: true, hb: 6 },
+    // — Le cœur d'étoiles —
+    { t: 63.2,  d: 5.6, cls: 'soft', txt: 'Alors j’ai dessiné un cœur dans les étoiles,', int: 1, beat: false, layer: { petals: 0, con: 1 } },
+    { t: 69.6,  d: 4.0, cls: 'hand', txt: 'rien que pour toi.', int: 1.6 },
+    { t: 74.4,  d: 4.4, cls: 'script sm', txt: 'mon ange', int: 2.6, burst: 18 },
+    { t: 79.6,  d: 6.8, cls: 'name sm pulse', txt: 'DIVINE', int: 4, burst: 40, letters: true },
+    { t: 87.2,  d: 6.8, cls: 'name sm pulse', txt: 'MON TOUT', int: 4, burst: 40, letters: true },
+    { t: 94.8,  d: 4.6, cls: 'soft', txt: 'Tu es mon plus beau rêve,', int: 1.4 },
+    { t: 100.0, d: 4.4, cls: 'soft', txt: 'et mon plus beau réveil.', int: 1.4, burst: 8 },
+    { t: 105.2, d: 4.8, cls: 'soft', txt: 'Je t’aime, aujourd’hui, demain,', int: 1.8, burst: 12 },
+    { t: 110.8, d: 5.6, cls: 'soft', txt: 'et jusqu’à la dernière étoile du ciel.', int: 2.4, burst: 36, shoot: 7 },
+    // — Le sommeil —
+    { t: 117.4, d: 4.8, cls: 'soft', txt: 'Maintenant, ferme les yeux…', int: .8, layer: { lanterns: 0, con: .55 } },
+    { t: 123.0, d: 4.0, cls: 'soft', txt: 'respire doucement…', int: .7 },
+    { t: 127.8, d: 5.8, cls: 'soft', txt: 'pose ta tête, et laisse-moi veiller sur ton sommeil.', int: .7, sleepy: true },
+    { t: 134.4, d: 5.4, cls: 'soft', txt: 'Je serai là, dans chacun de tes rêves.', int: 1.2, burst: 12 },
+    // — Final —
+    { t: 140.8, d: 0,   cls: 'final', int: 3, burst: 50, shoot: 4 }
+  ];
+
+  function makeLine(step){
+    const el = document.createElement('div');
+    if (step.cls === 'final'){ el.className = 'line'; el.innerHTML = FINAL_HTML; return el; }
+    el.className = 'line ' + step.cls;
+    if (step.letters){
+      [...step.txt].forEach((ch, i) => {
+        const s = document.createElement('span');
+        s.className = 'w'; s.style.animationDelay = (i * .16) + 's';
+        s.textContent = ch === ' ' ? '\u00A0' : ch;
+        el.appendChild(s);
+      });
+    } else {
+      step.txt.split(' ').forEach((word, i) => {
+        const s = document.createElement('span');
+        s.className = 'w'; s.style.animationDelay = (i * .28) + 's';
+        s.textContent = word;
+        el.appendChild(s);
+      });
+    }
+    return el;
+  }
+
+  function later(fn, sec){ timers.push(setTimeout(fn, sec * 1000)); }
+
+  function play(){
+    stage.innerHTML = '';
+    replay.classList.remove('show');
+    document.body.classList.remove('sleepy');
+    beatEl.classList.remove('on');
+    resetLayers();
+    intensity = 1;
+    SCRIPT.forEach(step => {
+      later(() => {
+        const el = makeLine(step);
+        stage.appendChild(el);
+        intensity = step.int;
+        if (step.burst) burst(step.burst);
+        if (step.shoot) shootMany(step.shoot);
+        if (step.layer) for (const k in step.layer) setLayer(k, step.layer[k]);
+        if (step.beat === true){ beatEl.classList.add('on'); }
+        if (step.beat === false){ beatEl.classList.remove('on'); }
+        if (step.hb) heartbeatSound(step.hb);
+        if (step.sleepy) document.body.classList.add('sleepy');
+        if (step.d > 0){
+          later(() => { el.classList.add('out'); setTimeout(() => el.remove(), 2800); }, step.d);
+        } else {
+          later(() => replay.classList.add('show'), 10);
+        }
+      }, step.t);
+    });
+  }
+
+  replay.addEventListener('click', () => {
+    timers.forEach(clearTimeout); timers = [];
+    replay.classList.remove('show');
+    stage.querySelectorAll('.line').forEach(l => l.classList.add('out'));
+    setTimeout(() => { stage.innerHTML = ''; play(); }, 1800);
+  });
+
+  document.getElementById('start').addEventListener('click', () => {
+    document.getElementById('intro').classList.add('gone');
+    document.body.classList.add('playing');
+    playing = true;
+    startMusic();
+    if (actx && actx.state === 'suspended') actx.resume();
+    burst(14);
+    play();
+  });
+})();
+</script>
+</body>
+</html>
